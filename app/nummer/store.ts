@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { GameState, Row } from '../types/game';
-import { shuffle } from '../utils/game';
+import { GameState, Row } from './types';
+import { shuffle } from './utils';
 
 const TOTAL_NUMBERS = 50;
 const MAX_NUMBERS = 10;

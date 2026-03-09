@@ -1,7 +1,7 @@
 'use client';
 
-import { useGameStore } from '../../stores/gameStore';
-import { Button } from '../ui/Button';
+import { useGameStore } from '../store';
+import { Button } from '../../components/ui/Button';
 
 export function PlayAgainButton() {
   const { reset } = useGameStore();

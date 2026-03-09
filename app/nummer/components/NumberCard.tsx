@@ -1,8 +1,8 @@
 'use client';
 
 import { memo } from 'react';
-import { useGameStore } from '../../stores/gameStore';
-import { Button } from './Button';
+import { useGameStore } from '../store';
+import { Button } from '../../components/ui/Button';
 
 type NumberCardProps = {
   num: number;

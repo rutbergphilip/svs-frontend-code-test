@@ -1,7 +1,7 @@
 'use client';
 
-import { Row } from '../../types/game';
-import { useGameStore } from '../../stores/gameStore';
+import { Row } from '../types';
+import { useGameStore } from '../store';
 
 type RowCardProps = {
   row: Row;

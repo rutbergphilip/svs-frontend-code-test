@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Nummerspel",
-  description: "Svenska Spel – Frontend kodtest",
+  title: 'Nummerspel',
+  description: 'Svenska Spel - Frontend kodtest',
 };
 
 export default function RootLayout({
@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sv">
+    <html lang='sv'>
       <body>{children}</body>
     </html>
   );

@@ -1,7 +1,7 @@
 'use client';
 
-import { useGameStore } from '../../stores/gameStore';
-import { NumberCard } from '../ui/NumberCard';
+import { useGameStore } from '../store';
+import { NumberCard } from './NumberCard';
 import { RowCard } from './RowCard';
 import { AddRowButton } from './AddRowButton';
 import { GradeButton } from './GradeButton';

@@ -1,7 +1,7 @@
 'use client';
 
-import { useGameStore, getActiveRow } from '../../stores/gameStore';
-import { Button } from '../ui/Button';
+import { useGameStore, getActiveRow } from '../store';
+import { Button } from '../../components/ui/Button';
 
 const MAX_NUMBERS = 10;
 

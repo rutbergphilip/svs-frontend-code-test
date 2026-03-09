@@ -1,6 +1,6 @@
 'use client';
 
-import { useGameStore } from '../../stores/gameStore';
+import { useGameStore } from '../store';
 
 export function CorrectRow() {
   const { correctNumbers } = useGameStore();

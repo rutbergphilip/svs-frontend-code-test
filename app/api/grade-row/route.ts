@@ -1,5 +1,5 @@
 import { setTimeout } from 'node:timers/promises';
-import { shuffle } from '@/app/utils/game';
+import { shuffle } from '@/app/nummer/utils';
 import { NextResponse } from 'next/server';
 
 export async function GET() {

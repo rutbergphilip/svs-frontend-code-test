@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useGameStore } from '../../stores/gameStore';
-import { Button } from '../ui/Button';
+import { useGameStore } from '../store';
+import { Button } from '../../components/ui/Button';
 
 const REQUIRED_NUMBERS = 10;
 
