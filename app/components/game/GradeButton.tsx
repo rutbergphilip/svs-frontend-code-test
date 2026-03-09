@@ -32,7 +32,7 @@ export function GradeButton() {
         aria-busy={isLoading}
         className='bg-green-700 text-white hover:bg-green-800'
       >
-        {isLoading ? 'Rättar...' : 'Rätta spel'}
+        {isLoading ? 'Rättar...' : 'Rätta mina rader'}
       </Button>
       {error && (
         <p role='alert' className='text-sm text-red-500'>
