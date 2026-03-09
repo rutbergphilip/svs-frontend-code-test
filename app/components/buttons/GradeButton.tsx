@@ -10,7 +10,7 @@ export function GradeButton() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { rows, gradeRows, graded } = useGameStore();
-  const canGrade = rows.every((row) => row.numbers.length === REQUIRED_NUMBERS);
+  const canGrade = rows.some((row) => row.numbers.length === REQUIRED_NUMBERS);
 
   const grade = async () => {
     setIsLoading(true);
