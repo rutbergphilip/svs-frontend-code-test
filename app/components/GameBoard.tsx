@@ -18,43 +18,46 @@ export function GameBoard() {
 
   return (
     <>
-      <div className='flex justify-between items-center w-full'>
-        <h1 className='text-2xl font-semibold'>Välj 10 nummer</h1>
-        <RandomizeButton />
-      </div>
-      <div
-        role='group'
-        aria-label='Välj nummer 1 - 50'
-        className='grid w-full grid-cols-10 gap-1 sm:gap-2'
-      >
-        {NUMBERS.map((n) => (
-          <NumberCard
-            key={n}
-            selected={selectedNums.includes(n)}
-            disabled={
-              (!selectedNums.includes(n) && activeRow?.numbers.length === 10) ||
-              graded
-            }
-            onClick={() => toggleNumber(n)}
+      {!graded && (
+        <>
+          <div className='flex justify-between items-center w-full'>
+            <h1 className='text-2xl font-semibold'>Välj 10 nummer</h1>
+            <RandomizeButton />
+          </div>
+          <div
+            role='group'
+            aria-label='Välj nummer 1 - 50'
+            className='grid w-full grid-cols-10 gap-1 sm:gap-2'
           >
-            {n}
-          </NumberCard>
-        ))}
-      </div>
+            {NUMBERS.map((n) => (
+              <NumberCard
+                key={n}
+                selected={selectedNums.includes(n)}
+                disabled={
+                  !selectedNums.includes(n) && activeRow?.numbers.length === 10
+                }
+                onClick={() => toggleNumber(n)}
+              >
+                {n}
+              </NumberCard>
+            ))}
+          </div>
+        </>
+      )}
       <div className='flex justify-between items-center w-full'>
         <div className='flex items-center gap-1'>
           <h2 className='text-xl text-left'>Mina rader</h2>
-          <p className='bg-gray-200 rounded-full w-6 h-6'>{rows.length}</p>
+          <p className='bg-gray-200 rounded-full w-6 h-6' aria-label={`${rows.length} rader`}>{rows.length}</p>
         </div>
-        <AddRowButton />
+        {!graded && <AddRowButton />}
       </div>
       <div
         role='list'
         aria-label='Sparade rader'
         className='flex w-full flex-col gap-2'
       >
-        {rows.map((row) => (
-          <RowCard key={row.id} row={row} isActive={row.id === activeRowId} />
+        {rows.map((row, index) => (
+          <RowCard key={row.id} row={row} index={index + 1} isActive={row.id === activeRowId} />
         ))}
       </div>
       {graded && <CorrectRow />}

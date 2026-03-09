@@ -5,28 +5,35 @@ import { useGameStore } from '../stores/gameStore';
 
 type RowCardProps = {
   row: Row;
+  index: number;
   isActive: boolean;
 };
 
-export function RowCard({ row, isActive }: RowCardProps) {
+export function RowCard({ row, index, isActive }: RowCardProps) {
   const { setActiveRow, removeRow, rows, graded, correctNumbers } =
     useGameStore();
 
   const correctSet = new Set(correctNumbers ?? []);
 
   return (
-    <button
-      type='button'
-      onClick={() => !graded && setActiveRow(row.id)}
+    <div
+      role='listitem'
+      aria-current={isActive && !graded ? 'true' : undefined}
       className={`flex w-full items-center gap-2 rounded-lg px-4 py-3 transition-colors ${
         graded
-          ? 'bg-gray-100 cursor-default'
+          ? 'bg-gray-100'
           : isActive
-            ? 'bg-blue-100 ring-2 ring-blue-500 cursor-pointer'
-            : 'bg-gray-100 hover:bg-gray-200 cursor-pointer'
+            ? 'bg-blue-100 ring-2 ring-blue-500'
+            : 'bg-gray-100 hover:bg-gray-200'
       }`}
     >
-      <span className='flex flex-1 gap-2 flex-wrap text-sm font-medium'>
+      <button
+        type='button'
+        onClick={() => !graded && setActiveRow(row.id)}
+        disabled={graded}
+        className='flex flex-1 gap-2 flex-wrap text-sm font-medium cursor-pointer disabled:cursor-default'
+        aria-label={`Redigera rad ${index}${isActive ? ' (aktiv)' : ''}`}
+      >
         {row.numbers.length > 0 ? (
           row.numbers.map((n) => (
             <span
@@ -43,24 +50,22 @@ export function RowCard({ row, isActive }: RowCardProps) {
         ) : (
           <span className='text-gray-400'>Inga nummer valda</span>
         )}
-      </span>
-      {graded && (
+      </button>
+      {graded && row.numbers.length === 10 && (
         <span className='text-sm font-medium text-green-600'>
           {row.numbers.filter((n) => correctSet.has(n.num)).length} rätt
         </span>
       )}
       {!graded && rows.length > 1 && (
-        <span
-          role='button'
-          onClick={(e) => {
-            e.stopPropagation();
-            removeRow(row.id);
-          }}
-          className='text-sm text-red-500 hover:text-red-600'
+        <button
+          type='button'
+          onClick={() => removeRow(row.id)}
+          aria-label={`Ta bort rad ${index}`}
+          className='text-sm text-red-500 hover:text-red-600 cursor-pointer'
         >
           Ta bort
-        </span>
+        </button>
       )}
-    </button>
+    </div>
   );
 }

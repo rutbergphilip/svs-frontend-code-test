@@ -115,7 +115,11 @@ export const useGameStore = create<GameState>((set) => ({
     const res = await fetch('/api/grade-row');
     if (!res.ok) throw new Error('Kunde inte hämta rättning');
     const data = await res.json();
-    set({ correctNumbers: data.numbers, graded: true });
+    set((state) => ({
+      rows: state.rows.filter((row) => row.numbers.length === MAX_NUMBERS),
+      correctNumbers: data.numbers,
+      graded: true,
+    }));
   },
 
   reset: () => {
