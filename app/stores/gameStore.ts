@@ -10,6 +10,10 @@ function createRow(): Row {
   return { id: crypto.randomUUID(), numbers: [] };
 }
 
+function sortedNumbers(numbers: Row['numbers']): Row['numbers'] {
+  return [...numbers].sort((a, b) => a.num - b.num);
+}
+
 const initialRow = createRow();
 
 export function getActiveRow(state: GameState): Row | undefined {
@@ -35,7 +39,7 @@ export const useGameStore = create<GameState>((set) => ({
         updatedNumbers = numbers.filter((n) => n.num !== num);
       } else {
         if (numbers.length >= MAX_NUMBERS) return state;
-        updatedNumbers = [...numbers, { num, isManual: true }];
+        updatedNumbers = sortedNumbers([...numbers, { num, isManual: true }]);
       }
 
       return {
@@ -72,7 +76,7 @@ export const useGameStore = create<GameState>((set) => ({
       return {
         rows: state.rows.map((row) =>
           row.id === state.activeRowId
-            ? { ...row, numbers: [...manualNumbers, ...randomized] }
+            ? { ...row, numbers: sortedNumbers([...manualNumbers, ...randomized]) }
             : row,
         ),
       };
