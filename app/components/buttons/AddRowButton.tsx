@@ -1,6 +1,7 @@
 'use client';
 
 import { useGameStore } from '../../stores/gameStore';
+import { Button } from '../ui/Button';
 
 const MAX_ROWS = 5;
 
@@ -9,13 +10,12 @@ export function AddRowButton() {
   const canAddRow = rows.length < MAX_ROWS;
 
   return (
-    <button
-      type='button'
+    <Button
       disabled={!canAddRow}
       onClick={addRow}
-      className='rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors'
+      className='bg-blue-500 text-white hover:bg-blue-600'
     >
       Lägg till rad
-    </button>
+    </Button>
   );
 }
