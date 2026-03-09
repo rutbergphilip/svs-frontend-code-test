@@ -154,9 +154,7 @@ Zustand-storen blev ren, all spellogik på ett ställe. Hade först två separat
 
 ### Vad gick mindre bra?
 
-Bestämma mig för hur det skulle se ut. Gick lite över rekommenderad tid med.
-Det blev lite discovery-utveckling, kunde inte riktigt tänka ut allt innan start.
-Att få till responsiviteten på min dåliga design var inte helt enkelt.
+Hade svårt att bestämma mig för designen, vilket ledde till att jag gick lite över rekommenderad tid. Kodade på utan en tydlig plan för utseendet, så det blev en del fram och tillbaka. Responsiviteten blev också knepig att lösa i efterhand när grunden inte var genomtänkt från start.
 
 ### Vad var den största utmaningen?
 
