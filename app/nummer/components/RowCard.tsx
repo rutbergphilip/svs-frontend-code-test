@@ -31,7 +31,7 @@ export function RowCard({ row, index, isActive }: RowCardProps) {
         type='button'
         onClick={() => !graded && setActiveRow(row.id)}
         disabled={graded}
-        className='flex flex-1 gap-2 flex-wrap text-sm font-medium cursor-pointer disabled:cursor-default'
+        className='flex flex-1 gap-2 flex-wrap text-sm font-medium cursor-pointer disabled:cursor-default focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded'
         aria-label={`Redigera rad ${index}${isActive ? ' (aktiv)' : ''}`}
       >
         {row.numbers.length > 0 ? (
@@ -64,7 +64,7 @@ export function RowCard({ row, index, isActive }: RowCardProps) {
           type='button'
           onClick={() => removeRow(row.id)}
           aria-label={`Ta bort rad ${index}`}
-          className='text-sm text-red-500 hover:text-red-600 cursor-pointer'
+          className='text-sm text-red-500 hover:text-red-600 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded'
         >
           Ta bort
         </button>
