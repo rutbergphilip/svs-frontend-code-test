@@ -6,31 +6,34 @@ import { RowCard } from './RowCard';
 import { AddRowButton } from './buttons/AddRowButton';
 import { GradeButton } from './buttons/GradeButton';
 import { RandomizeButton } from './buttons/RandomizeButton';
+import { CorrectRow } from './CorrectRow';
+import { PlayAgainButton } from './buttons/PlayAgainButton';
 
 const NUMBERS = Array.from({ length: 50 }, (_, i) => i + 1);
 
 export function GameBoard() {
-  const { rows, activeRowId, toggleNumber } = useGameStore();
+  const { rows, activeRowId, toggleNumber, graded } = useGameStore();
   const activeRow = rows.find((r) => r.id === activeRowId);
   const selectedNums = activeRow?.numbers.map((n) => n.num) ?? [];
 
   return (
     <>
-      <section className='flex justify-between items-center w-full'>
+      <div className='flex justify-between items-center w-full'>
         <h1 className='text-2xl font-semibold'>Välj 10 nummer</h1>
         <RandomizeButton />
-      </section>
+      </div>
       <div
         role='group'
         aria-label='Välj nummer 1 - 50'
-        className='grid grid-cols-10 gap-2'
+        className='grid w-full grid-cols-10 gap-1 sm:gap-2'
       >
         {NUMBERS.map((n) => (
           <NumberCard
             key={n}
             selected={selectedNums.includes(n)}
             disabled={
-              !selectedNums.includes(n) && activeRow?.numbers.length === 10
+              (!selectedNums.includes(n) && activeRow?.numbers.length === 10) ||
+              graded
             }
             onClick={() => toggleNumber(n)}
           >
@@ -41,7 +44,7 @@ export function GameBoard() {
       <div className='flex justify-between items-center w-full'>
         <div className='flex items-center gap-1'>
           <h2 className='text-xl text-left'>Mina rader</h2>
-          <p className='py-1 px-2 bg-gray-200 rounded-full'>{rows.length}</p>
+          <p className='bg-gray-200 rounded-full w-6 h-6'>{rows.length}</p>
         </div>
         <AddRowButton />
       </div>
@@ -54,8 +57,9 @@ export function GameBoard() {
           <RowCard key={row.id} row={row} isActive={row.id === activeRowId} />
         ))}
       </div>
+      {graded && <CorrectRow />}
       <div className='w-full flex justify-end'>
-        <GradeButton />
+        {graded ? <PlayAgainButton /> : <GradeButton />}
       </div>
     </>
   );

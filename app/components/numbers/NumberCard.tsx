@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '../ui/Button';
+
 type NumberCardProps = {
   onClick: () => void;
   children: React.ReactNode;
@@ -11,8 +13,11 @@ function getCardStyle({
   selected,
   disabled,
 }: Omit<NumberCardProps, 'children' | 'onClick'>): string {
-  const base = 'w-10 h-10 rounded-lg font-medium transition-colors';
+  const base =
+    'aspect-square w-full rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center justify-center';
 
+  if (selected && disabled)
+    return `${base} disabled:bg-blue-300! disabled:text-white cursor-not-allowed`;
   if (disabled) return `${base} bg-gray-50 text-gray-300 cursor-not-allowed`;
   if (selected) return `${base} bg-blue-500 text-white hover:bg-blue-600`;
   return `${base} bg-gray-100 text-gray-800 hover:bg-gray-200 cursor-pointer`;
@@ -25,7 +30,7 @@ export function NumberCard({
   onClick,
 }: NumberCardProps) {
   return (
-    <button
+    <Button
       className={getCardStyle({ selected, disabled })}
       onClick={onClick}
       type='button'
@@ -33,6 +38,6 @@ export function NumberCard({
       disabled={disabled}
     >
       {children}
-    </button>
+    </Button>
   );
 }
