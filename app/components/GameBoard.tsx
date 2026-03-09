@@ -5,6 +5,7 @@ import { NumberCard } from './numbers/NumberCard';
 import { RowCard } from './RowCard';
 import { AddRowButton } from './buttons/AddRowButton';
 import { GradeButton } from './buttons/GradeButton';
+import { RandomizeButton } from './buttons/RandomizeButton';
 
 const NUMBERS = Array.from({ length: 50 }, (_, i) => i + 1);
 
@@ -15,7 +16,10 @@ export function GameBoard() {
 
   return (
     <>
-      <h1 className='text-2xl font-semibold'>Välj 10 nummer</h1>
+      <section className='flex justify-between items-center w-full'>
+        <h1 className='text-2xl font-semibold'>Välj 10 nummer</h1>
+        <RandomizeButton />
+      </section>
       <div
         role='group'
         aria-label='Välj nummer 1 - 50'

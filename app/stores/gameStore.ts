@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { GameState, Row } from '../types/game';
+import { shuffle } from '../utils/game';
 
+const TOTAL_NUMBERS = 50;
 const MAX_NUMBERS = 10;
 const MAX_ROWS = 5;
 
@@ -10,6 +12,10 @@ function createRow(): Row {
 
 const initialRow = createRow();
 
+export function getActiveRow(state: GameState): Row | undefined {
+  return state.rows.find((r) => r.id === state.activeRowId);
+}
+
 export const useGameStore = create<GameState>((set) => ({
   rows: [initialRow],
   activeRowId: initialRow.id,
@@ -18,7 +24,7 @@ export const useGameStore = create<GameState>((set) => ({
 
   toggleNumber: (num) => {
     set((state) => {
-      const activeRow = state.rows.find((r) => r.id === state.activeRowId);
+      const activeRow = getActiveRow(state);
       if (!activeRow) return state;
 
       const { numbers } = activeRow;
@@ -43,10 +49,35 @@ export const useGameStore = create<GameState>((set) => ({
   },
 
   randomizeRemaining: () => {
-    // TODO
-  },
+    set((state) => {
+      const activeRow = getActiveRow(state);
+      if (!activeRow) return state;
 
-  activeRowIsFull: () => ({}),
+      const manualNumbers = activeRow.numbers.filter((n) => n.isManual);
+      if (manualNumbers.length >= MAX_NUMBERS) return state;
+
+      const manualNums = manualNumbers.map((n) => n.num);
+      const available = Array.from(
+        { length: TOTAL_NUMBERS },
+        (_, i) => i + 1,
+      ).filter((num) => !manualNums.includes(num));
+
+      // Först shufflar vi alla siffror
+      const shuffled = shuffle(available);
+      // Sedan tar vi första siffrorna i listan (så många vi behöver)
+      const randomized = shuffled
+        .slice(0, MAX_NUMBERS - manualNumbers.length)
+        .map((num) => ({ num, isManual: false }));
+
+      return {
+        rows: state.rows.map((row) =>
+          row.id === state.activeRowId
+            ? { ...row, numbers: [...manualNumbers, ...randomized] }
+            : row,
+        ),
+      };
+    });
+  },
 
   addRow: () => {
     set((state) => {
