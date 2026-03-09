@@ -12,7 +12,7 @@ import { PlayAgainButton } from './PlayAgainButton';
 const NUMBERS = Array.from({ length: 50 }, (_, i) => i + 1);
 
 export function GameBoard() {
-  const { rows, activeRowId, toggleNumber, graded } = useGameStore();
+  const { rows, activeRowId, graded } = useGameStore();
   const activeRow = rows.find((r) => r.id === activeRowId);
   const selectedNums = activeRow?.numbers.map((n) => n.num) ?? [];
 
@@ -32,14 +32,12 @@ export function GameBoard() {
             {NUMBERS.map((n) => (
               <NumberCard
                 key={n}
+                num={n}
                 selected={selectedNums.includes(n)}
                 disabled={
                   !selectedNums.includes(n) && activeRow?.numbers.length === 10
                 }
-                onClick={() => toggleNumber(n)}
-              >
-                {n}
-              </NumberCard>
+              />
             ))}
           </div>
         </>
