@@ -6,10 +6,10 @@ import { Button } from '../ui/Button';
 const MAX_NUMBERS = 10;
 
 export function RandomizeButton() {
-  const { randomizeRemaining } = useGameStore();
+  const { randomizeRemaining, graded } = useGameStore();
   const activeRow = useGameStore(getActiveRow);
   const manualCount = activeRow?.numbers.filter((n) => n.isManual).length ?? 0;
-  const disabled = manualCount >= MAX_NUMBERS;
+  const disabled = manualCount >= MAX_NUMBERS || graded;
 
   return (
     <Button

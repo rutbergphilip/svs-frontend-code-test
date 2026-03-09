@@ -1,21 +1,44 @@
 'use client';
 
+import { useState } from 'react';
 import { useGameStore } from '../../stores/gameStore';
 import { Button } from '../ui/Button';
 
 const REQUIRED_NUMBERS = 10;
 
 export function GradeButton() {
-  const { rows, gradeRows } = useGameStore();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { rows, gradeRows, graded } = useGameStore();
   const canGrade = rows.every((row) => row.numbers.length === REQUIRED_NUMBERS);
 
+  const grade = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      await gradeRows();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Något gick fel');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <Button
-      disabled={!canGrade}
-      onClick={gradeRows}
-      className='bg-green-500 text-white hover:bg-green-600'
-    >
-      Rätta spel
-    </Button>
+    <div className='flex flex-col items-end gap-2'>
+      <Button
+        disabled={!canGrade || graded || isLoading}
+        onClick={grade}
+        aria-busy={isLoading}
+        className='bg-green-500 text-white hover:bg-green-600'
+      >
+        {isLoading ? 'Rättar...' : 'Rätta spel'}
+      </Button>
+      {error && (
+        <p role='alert' className='text-sm text-red-500'>
+          {error}
+        </p>
+      )}
+    </div>
   );
 }

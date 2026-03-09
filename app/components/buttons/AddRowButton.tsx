@@ -6,12 +6,12 @@ import { Button } from '../ui/Button';
 const MAX_ROWS = 5;
 
 export function AddRowButton() {
-  const { rows, addRow } = useGameStore();
-  const canAddRow = rows.length < MAX_ROWS;
+  const { rows, addRow, graded } = useGameStore();
+  const disabled = rows.length >= MAX_ROWS || graded;
 
   return (
     <Button
-      disabled={!canAddRow}
+      disabled={disabled}
       onClick={addRow}
       className='bg-blue-500 text-white hover:bg-blue-600'
     >
