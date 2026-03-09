@@ -165,7 +165,7 @@ Hade svårt att bestämma mig för designen, vilket ledde till att jag gick lite
 
 ### Vad skulle du göra om du hade mer tid?
 
-Finare UI, historik, skrivit tester. Gärna mer animationer för en trevligare upplevelse.
+Finare UI, historik, skrivit tester. Gärna mer animationer för en trevligare upplevelse. Använt mindre AI.
 
 ### Skulle du gjort något annorlunda om du fick börja om?
 
