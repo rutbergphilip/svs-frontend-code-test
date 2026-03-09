@@ -2,6 +2,7 @@
 
 import { Row } from '../types';
 import { useGameStore } from '../store';
+import { MAX_NUMBERS } from '../constants';
 
 type RowCardProps = {
   row: Row;
@@ -50,10 +51,10 @@ export function RowCard({ row, index, isActive }: RowCardProps) {
           <span className='text-gray-400'>Inga nummer valda</span>
         )}
       </button>
-      {graded && row.numbers.length === 10 && (
+      {graded && row.numbers.length === MAX_NUMBERS && (
         <span
           className='text-sm font-medium text-green-800'
-          aria-label={`Rad ${index}: ${row.numbers.filter((n) => correctSet.has(n.num)).length} rätt av 10`}
+          aria-label={`Rad ${index}: ${row.numbers.filter((n) => correctSet.has(n.num)).length} rätt av ${MAX_NUMBERS}`}
         >
           {row.numbers.filter((n) => correctSet.has(n.num)).length} rätt
         </span>

@@ -1,10 +1,7 @@
 import { create } from 'zustand';
 import { GameState, Row } from './types';
 import { shuffle } from './utils';
-
-const TOTAL_NUMBERS = 50;
-const MAX_NUMBERS = 10;
-const MAX_ROWS = 5;
+import { TOTAL_NUMBERS, MAX_NUMBERS, MAX_ROWS } from './constants';
 
 function createRow(): Row {
   return { id: crypto.randomUUID(), numbers: [] };

@@ -2,8 +2,7 @@
 
 import { useGameStore } from '../store';
 import { Button } from '../../components/ui/Button';
-
-const MAX_ROWS = 5;
+import { MAX_ROWS } from '../constants';
 
 export function AddRowButton() {
   const { rows, addRow, graded } = useGameStore();

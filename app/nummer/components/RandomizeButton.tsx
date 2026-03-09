@@ -2,8 +2,7 @@
 
 import { useGameStore, getActiveRow } from '../store';
 import { Button } from '../../components/ui/Button';
-
-const MAX_NUMBERS = 10;
+import { MAX_NUMBERS } from '../constants';
 
 export function RandomizeButton() {
   const { randomizeRemaining, graded } = useGameStore();

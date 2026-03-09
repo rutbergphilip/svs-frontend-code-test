@@ -8,8 +8,7 @@ import { GradeButton } from './GradeButton';
 import { RandomizeButton } from './RandomizeButton';
 import { CorrectRow } from './CorrectRow';
 import { PlayAgainButton } from './PlayAgainButton';
-
-const NUMBERS = Array.from({ length: 50 }, (_, i) => i + 1);
+import { NUMBERS, MAX_NUMBERS } from '../constants';
 
 export function GameBoard() {
   const { rows, activeRowId, graded } = useGameStore();
@@ -35,7 +34,7 @@ export function GameBoard() {
                 num={n}
                 selected={selectedNums.includes(n)}
                 disabled={
-                  !selectedNums.includes(n) && activeRow?.numbers.length === 10
+                  !selectedNums.includes(n) && activeRow?.numbers.length === MAX_NUMBERS
                 }
               />
             ))}

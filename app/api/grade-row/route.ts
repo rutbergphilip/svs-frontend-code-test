@@ -1,14 +1,12 @@
 import { setTimeout } from 'node:timers/promises';
 import { shuffle } from '@/app/nummer/utils';
+import { NUMBERS, MAX_NUMBERS } from '@/app/nummer/constants';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   await setTimeout(500);
 
-  const numbers = shuffle(Array.from({ length: 50 }, (_, i) => i + 1)).slice(
-    0,
-    10,
-  );
+  const numbers = shuffle([...NUMBERS]).slice(0, MAX_NUMBERS);
 
   return NextResponse.json({ numbers });
 }
