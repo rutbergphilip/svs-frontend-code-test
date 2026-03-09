@@ -108,7 +108,10 @@ export const useGameStore = create<GameState>((set) => ({
   },
 
   gradeRows: async () => {
-    // TODO
+    const res = await fetch('/api/grade-row');
+    if (!res.ok) throw new Error('Kunde inte hämta rättning');
+    const data = await res.json();
+    set({ correctNumbers: data.numbers, graded: true });
   },
 
   reset: () => {
