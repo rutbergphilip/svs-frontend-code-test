@@ -1,13 +1,13 @@
 'use client';
 
-import { useGameStore } from '../stores/gameStore';
-import { NumberCard } from './numbers/NumberCard';
+import { useGameStore } from '../../stores/gameStore';
+import { NumberCard } from '../ui/NumberCard';
 import { RowCard } from './RowCard';
-import { AddRowButton } from './buttons/AddRowButton';
-import { GradeButton } from './buttons/GradeButton';
-import { RandomizeButton } from './buttons/RandomizeButton';
+import { AddRowButton } from './AddRowButton';
+import { GradeButton } from './GradeButton';
+import { RandomizeButton } from './RandomizeButton';
 import { CorrectRow } from './CorrectRow';
-import { PlayAgainButton } from './buttons/PlayAgainButton';
+import { PlayAgainButton } from './PlayAgainButton';
 
 const NUMBERS = Array.from({ length: 50 }, (_, i) => i + 1);
 
@@ -17,11 +17,11 @@ export function GameBoard() {
   const selectedNums = activeRow?.numbers.map((n) => n.num) ?? [];
 
   return (
-    <>
+    <section className='flex w-full flex-col items-start gap-4'>
       {!graded && (
         <>
           <div className='flex justify-between items-center w-full'>
-            <h1 className='text-2xl font-semibold'>Välj 10 nummer</h1>
+            <h2 className='text-xl font-semibold'>Välj 10 nummer</h2>
             <RandomizeButton />
           </div>
           <div
@@ -47,23 +47,36 @@ export function GameBoard() {
       <div className='flex justify-between items-center w-full'>
         <div className='flex items-center gap-1'>
           <h2 className='text-xl text-left'>Mina rader</h2>
-          <p className='bg-gray-200 rounded-full w-6 h-6' aria-label={`${rows.length} rader`}>{rows.length}</p>
+          <span
+            role='status'
+            className='bg-gray-200 rounded-full w-6 h-6'
+            aria-label={`${rows.length} rader`}
+          >
+            {rows.length}
+          </span>
         </div>
         {!graded && <AddRowButton />}
       </div>
-      <div
-        role='list'
+      <ul
         aria-label='Sparade rader'
-        className='flex w-full flex-col gap-2'
+        className='flex w-full flex-col gap-2 list-none m-0 p-0'
       >
         {rows.map((row, index) => (
-          <RowCard key={row.id} row={row} index={index + 1} isActive={row.id === activeRowId} />
+          <li key={row.id}>
+            <RowCard
+              row={row}
+              index={index + 1}
+              isActive={row.id === activeRowId}
+            />
+          </li>
         ))}
+      </ul>
+      <div aria-live='polite' aria-atomic='true'>
+        {graded && <CorrectRow />}
       </div>
-      {graded && <CorrectRow />}
       <div className='w-full flex justify-end'>
         {graded ? <PlayAgainButton /> : <GradeButton />}
       </div>
-    </>
+    </section>
   );
 }

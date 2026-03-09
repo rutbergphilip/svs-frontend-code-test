@@ -1,7 +1,7 @@
 'use client';
 
-import { Row } from '../types/game';
-import { useGameStore } from '../stores/gameStore';
+import { Row } from '../../types/game';
+import { useGameStore } from '../../stores/gameStore';
 
 type RowCardProps = {
   row: Row;
@@ -17,7 +17,6 @@ export function RowCard({ row, index, isActive }: RowCardProps) {
 
   return (
     <div
-      role='listitem'
       aria-current={isActive && !graded ? 'true' : undefined}
       className={`flex w-full items-center gap-2 rounded-lg px-4 py-3 transition-colors ${
         graded
@@ -52,7 +51,10 @@ export function RowCard({ row, index, isActive }: RowCardProps) {
         )}
       </button>
       {graded && row.numbers.length === 10 && (
-        <span className='text-sm font-medium text-green-600'>
+        <span
+          className='text-sm font-medium text-green-800'
+          aria-label={`Rad ${index}: ${row.numbers.filter((n) => correctSet.has(n.num)).length} rätt av 10`}
+        >
           {row.numbers.filter((n) => correctSet.has(n.num)).length} rätt
         </span>
       )}

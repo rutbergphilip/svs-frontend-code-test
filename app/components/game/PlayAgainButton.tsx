@@ -10,7 +10,7 @@ export function PlayAgainButton() {
     <div className='flex flex-col items-end gap-2'>
       <Button
         onClick={reset}
-        className='bg-green-500 text-white hover:bg-green-600'
+        className='bg-green-700 text-white hover:bg-green-800'
       >
         {'Spela igen'}
       </Button>

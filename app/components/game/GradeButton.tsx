@@ -30,7 +30,7 @@ export function GradeButton() {
         disabled={!canGrade || graded || isLoading}
         onClick={grade}
         aria-busy={isLoading}
-        className='bg-green-500 text-white hover:bg-green-600'
+        className='bg-green-700 text-white hover:bg-green-800'
       >
         {isLoading ? 'Rättar...' : 'Rätta spel'}
       </Button>

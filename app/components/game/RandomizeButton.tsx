@@ -15,7 +15,8 @@ export function RandomizeButton() {
     <Button
       disabled={disabled}
       onClick={randomizeRemaining}
-      className='bg-blue-500 text-white hover:bg-blue-600'
+      aria-label={disabled ? 'Slumpa nummer (alla nummer valda manuellt)' : 'Slumpa nummer'}
+      className='bg-blue-700 text-white hover:bg-blue-800'
     >
       Slumpa nummer
     </Button>

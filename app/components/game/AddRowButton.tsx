@@ -13,7 +13,8 @@ export function AddRowButton() {
     <Button
       disabled={disabled}
       onClick={addRow}
-      className='bg-blue-500 text-white hover:bg-blue-600'
+      aria-label={disabled ? `Lägg till rad (max ${MAX_ROWS} rader)` : 'Lägg till rad'}
+      className='bg-blue-700 text-white hover:bg-blue-800'
     >
       Lägg till rad
     </Button>
